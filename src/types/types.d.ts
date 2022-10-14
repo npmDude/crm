@@ -1,4 +1,4 @@
 export interface ActionState {
   loading: boolean;
-  error: any;
+  error: string | Record<any, any> | null;
 }
