@@ -1,0 +1,13 @@
+// Import all of Bootstrap's CSS
+@import "~bootstrap/scss/bootstrap";
+
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
