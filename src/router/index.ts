@@ -13,9 +13,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/agents',
-      name: 'agents',
-      component: () => import('../views/agents/IndexView.vue')
+      path: '/staffs',
+      name: 'staffs',
+      component: () => import('../views/staffs/IndexView.vue')
     },
     {
       path: '/about',

@@ -26,11 +26,11 @@
           <li class="nav-item">
             <RouterLink
               class="nav-link"
-              to="/agents"
+              to="/staffs"
               active-class="active"
               @click="hideNavbarCollapse"
             >
-              Agents
+              Staffs
             </RouterLink>
           </li>
           <li class="nav-item">
