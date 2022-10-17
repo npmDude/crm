@@ -1,6 +1,6 @@
 # crm
 
-A simple CRM made with Vue 3.
+A simple CRM made with Vue 3, Pinia and Bootstrap 5.
 
 ## Recommended IDE Setup
 
