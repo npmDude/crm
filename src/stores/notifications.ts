@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-interface Notification {
-  key: number;
+export interface Notification {
+  id: number;
   message: string;
   variant:
     | 'primary'
@@ -24,16 +24,16 @@ export const useNotificationStore = defineStore('notification', () => {
 
   function enqueue(notification: PartialNotification) {
     notifications.value.push({
-      key: new Date().getTime() + Math.random(),
+      id: new Date().getTime() + Math.random(),
       variant: 'info',
       dismissible: false,
       ...notification
     });
   }
 
-  function remove(key: number) {
+  function remove(id: number) {
     notifications.value.splice(
-      notifications.value.findIndex((n) => n.key === key),
+      notifications.value.findIndex((n) => n.id === id),
       1
     );
   }
