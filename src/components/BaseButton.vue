@@ -2,7 +2,7 @@
   <button
     type="button"
     :class="['btn', `btn-${variant}`, 'position-relative']"
-    :disabled="busy"
+    :disabled="busy || disabled"
   >
     <div v-if="busy" class="position-absolute top-50 start-50 translate-middle">
       <div
@@ -31,6 +31,7 @@ interface Props {
     | 'dark'
     | 'link';
   busy?: boolean;
+  disabled?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
