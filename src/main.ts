@@ -13,6 +13,8 @@ import 'bootstrap';
 const app = createApp(App);
 
 const pinia = createPinia();
+
+// Add vue router as a property of pinia stores
 pinia.use(({ store }) => {
   store.router = markRaw(router);
 });

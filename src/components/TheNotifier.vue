@@ -61,7 +61,7 @@ watch(
       handledIds.value.push(notification.id);
 
       // Remove notification from store
-      // notificationStore.remove(notification.id);
+      notificationStore.remove(notification.id);
     }
   },
   { deep: true }
