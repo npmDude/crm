@@ -5,6 +5,8 @@
     tabindex="-1"
     aria-labelledby="addStaffModalTitle"
     aria-hidden="true"
+    @[shownModalEvent]="onModalShown"
+    @[hiddenModalEvent]="onModalHidden"
   >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -22,6 +24,7 @@
         <div class="modal-body">
           <div class="form-floating mb-3">
             <input
+              ref="input"
               id="field-name"
               type="text"
               v-model="value"
@@ -67,11 +70,25 @@ import { ref } from 'vue';
 import { string as yupString } from 'yup';
 import BaseButton from '../BaseButton.vue';
 
-const { value, meta } = useField<string>('name', yupString().required());
+const modal = ref<HTMLDivElement | null>(null);
+const input = ref<HTMLInputElement | null>(null);
+const { value, meta, resetField } = useField<string>(
+  'name',
+  yupString().required()
+);
 const { valid, validityClass } = useFieldValidity(meta);
 const staffStore = useStaffStore();
 const { insertLoading, insertError } = storeToRefs(staffStore);
-const modal = ref<HTMLDivElement | null>(null);
+const hiddenModalEvent = 'hidden.bs.modal';
+const shownModalEvent = 'shown.bs.modal';
+
+const onModalShown = () => {
+  input.value?.focus();
+};
+
+const onModalHidden = () => {
+  resetField();
+};
 
 onKeyStroke('Enter', (e) => {
   e.preventDefault();
