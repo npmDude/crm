@@ -14,7 +14,9 @@
 
       <template v-else>
         <tr v-for="staff in staffs" :key="staff.id">
-          <td>{{ staff.id }}</td>
+          <td>
+            <RouterLink :to="`staffs/${staff.id}`">{{ staff.id }}</RouterLink>
+          </td>
           <td>{{ staff.name }}</td>
         </tr>
       </template>
