@@ -20,25 +20,19 @@
 import useFieldValidity from '@/composables/useFieldValidity';
 import { useField } from 'vee-validate';
 import { toRef } from 'vue';
+import type { AnySchema } from 'yup';
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true
-  },
-  label: {
-    type: String,
-    required: true
-  },
-  type: {
-    type: String,
-    default: 'text'
-  },
-  value: {
-    type: String,
-    default: ''
-  },
-  rules: null
+interface Props {
+  name: string;
+  label: string;
+  type?: string;
+  value?: string | number | null;
+  rules?: AnySchema;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'text',
+  value: ''
 });
 
 // use `toRef` to create reactive references to `name` prop which is passed to `useField`
