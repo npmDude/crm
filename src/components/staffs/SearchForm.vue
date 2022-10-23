@@ -2,31 +2,11 @@
   <form @submit="handleFormSubmit">
     <div class="row mb-3">
       <div class="col-md">
-        <div class="form-floating mb-3 mb-md-0">
-          <input
-            id="field-id"
-            type="text"
-            :value="idValue"
-            :class="['form-control', idValidityClass]"
-            placeholder="ID"
-            @input="handleNumberInput($event, setIdValue)"
-          />
-          <label for="field-id">ID</label>
-        </div>
+        <InputFloating name="id" type="number" label="ID" />
       </div>
 
       <div class="col-md">
-        <div class="form-floating">
-          <input
-            id="field-name"
-            type="text"
-            :value="nameValue"
-            :class="['form-control', nameValidityClass]"
-            placeholder="Name"
-            @input="handleTextInput($event, setNameValue)"
-          />
-          <label for="field-name">Name</label>
-        </div>
+        <InputFloating name="name" label="Name" />
       </div>
     </div>
 
@@ -37,9 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import useFieldValidity from '@/composables/useFieldValidity';
-import { handleNumberInput, handleTextInput } from '@/utils/handleInput';
-import { useField, useForm } from 'vee-validate';
+import { useForm } from 'vee-validate';
 import {
   number as yupNumber,
   object as yupObject,
@@ -47,6 +25,7 @@ import {
   type InferType
 } from 'yup';
 import BaseButton from '../BaseButton.vue';
+import InputFloating from '../InputFloating.vue';
 
 interface Emits {
   (e: 'submit', params: any): void;
@@ -66,20 +45,6 @@ const { handleSubmit } = useForm<InferType<typeof validationSchema>>({
     name: null
   }
 });
-
-const {
-  value: idValue,
-  meta: idMeta,
-  setValue: setIdValue
-} = useField<number | null>('id');
-const { validityClass: idValidityClass } = useFieldValidity(idMeta);
-
-const {
-  value: nameValue,
-  meta: nameMeta,
-  setValue: setNameValue
-} = useField<string | null>('name');
-const { validityClass: nameValidityClass } = useFieldValidity(nameMeta);
 
 const handleFormSubmit = handleSubmit(async (values) => {
   emit('submit', values);
