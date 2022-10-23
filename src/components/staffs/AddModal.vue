@@ -81,19 +81,24 @@ const staffStore = useStaffStore();
 const { insertLoading, insertError } = storeToRefs(staffStore);
 const hiddenModalEvent = 'hidden.bs.modal';
 const shownModalEvent = 'shown.bs.modal';
+const isShown = ref(false);
 
 const onModalShown = () => {
+  isShown.value = true;
   input.value?.focus();
 };
 
 const onModalHidden = () => {
+  isShown.value = false;
   resetField();
 };
 
 onKeyStroke('Enter', (e) => {
-  e.preventDefault();
+  if (isShown.value) {
+    e.preventDefault();
 
-  handleSaveClick();
+    handleSaveClick();
+  }
 });
 
 const handleSaveClick = () => {
