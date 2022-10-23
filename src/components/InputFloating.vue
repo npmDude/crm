@@ -1,6 +1,7 @@
 <template>
   <div class="form-floating">
     <input
+      ref="input"
       :type="type"
       :id="`field-${name}`"
       :name="name"
@@ -19,7 +20,7 @@
 <script setup lang="ts">
 import useFieldValidity from '@/composables/useFieldValidity';
 import { useField } from 'vee-validate';
-import { toRef } from 'vue';
+import { ref, toRef } from 'vue';
 import type { AnySchema } from 'yup';
 
 interface Props {
@@ -34,6 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   value: ''
 });
+const input = ref<HTMLInputElement | null>(null);
 
 // use `toRef` to create reactive references to `name` prop which is passed to `useField`
 // this is important because vee-validte needs to know if the field name changes
@@ -51,6 +53,10 @@ const {
   initialValue: props.value
 });
 const { validityClass } = useFieldValidity(meta);
+
+const focus = () => {
+  input.value?.focus();
+};
 
 const handleInput = (e: Event) => {
   if (props.type === 'number') {
@@ -86,4 +92,8 @@ const handleNumberInput = (e: Event) => {
     setValue(numberValue);
   }
 };
+
+defineExpose({
+  focus
+});
 </script>
