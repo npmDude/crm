@@ -9,9 +9,28 @@
     </thead>
 
     <tbody>
-      <TableLoadingRow v-if="busy" :colspan="fieldCount" />
+      <tr v-if="busy">
+        <td :colspan="fieldCount">
+          <slot name="table-busy">
+            <div class="text-center">
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              >
+              </span>
+              {{ ` ` }}
+              <strong>Loading...</strong>
+            </div>
+          </slot>
+        </td>
+      </tr>
 
-      <TableNoDataRow v-else-if="itemCount === 0" :colspan="fieldCount" />
+      <tr v-else-if="itemCount === 0">
+        <td :colspan="fieldCount" class="text-center">
+          <slot name="empty">No data to display.</slot>
+        </td>
+      </tr>
 
       <template v-else>
         <tr v-for="(item, index) in paginatedItems" :key="index">
@@ -34,8 +53,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import TableLoadingRow from './TableLoadingRow.vue';
-import TableNoDataRow from './TableNoDataRow.vue';
 
 interface Props {
   fields: { key: string; label?: string }[];
