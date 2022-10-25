@@ -1,6 +1,6 @@
 <template>
   <nav aria-label="Search results pages">
-    <ul :class="['pagination', align && `justify-content-${align}`]">
+    <ul :class="['pagination mb-0', align && `justify-content-${align}`]">
       <li :class="['page-item', modelValue === 1 && 'disabled']">
         <a
           class="page-link"
