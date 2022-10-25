@@ -1,5 +1,10 @@
 <template>
-  <table :class="['table', { 'table-sm': small, 'table-striped': striped }]">
+  <table
+    :class="[
+      'table',
+      { 'table-sm': small, 'table-striped': striped, 'table-hover': hover }
+    ]"
+  >
     <thead>
       <tr>
         <th v-for="th in fields" :key="th.key" scope="col">
@@ -59,6 +64,7 @@ interface Props {
   items?: any[];
   busy?: boolean;
   small?: boolean;
+  hover?: boolean;
   striped?: boolean;
   perPage?: number;
   currentPage?: number;
