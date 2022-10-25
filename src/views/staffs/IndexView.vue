@@ -17,7 +17,7 @@
 
     <StaffSearchForm class="mb-3" @submit="handleSubmit" />
 
-    <StaffListTable />
+    <StaffListCard />
 
     <StaffAddModal id="addStaffModal" />
   </div>
@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import BasePageHeader from '@/components/BasePageHeader.vue';
 import StaffAddModal from '@/components/staffs/AddModal.vue';
-import StaffListTable from '@/components/staffs/ListTable.vue';
+import StaffListCard from '@/components/staffs/ListCard.vue';
 import StaffSearchForm from '@/components/staffs/SearchForm.vue';
 import { useStaffStore } from '@/stores/staffs';
 
