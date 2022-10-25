@@ -8,6 +8,7 @@
       :value="inputValue"
       :placeholder="label"
       :class="['form-control', validityClass]"
+      :readonly="readonly"
       @input="handleInput"
     />
     <label :for="`field-${name}`">{{ label }}</label>
@@ -29,6 +30,7 @@ interface Props {
   type?: string;
   value?: string | number | null;
   rules?: AnySchema;
+  readonly?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
