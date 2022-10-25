@@ -1,24 +1,28 @@
 <template>
-  <BaseTable
-    :fields="fields"
-    :items="staffs"
-    :busy="getListLoading"
-    small
-    striped
-    :per-page="10"
-    :current-page="currentPage"
-  >
-    <template #cell(id)="{ value }">
-      <RouterLink :to="`staffs/${value}`">{{ value }}</RouterLink>
-    </template>
-  </BaseTable>
+  <div class="card">
+    <div class="card-body">
+      <BaseTable
+        :fields="fields"
+        :items="staffs"
+        :busy="getListLoading"
+        small
+        hover
+        :per-page="10"
+        :current-page="currentPage"
+      >
+        <template #cell(id)="{ value }">
+          <RouterLink :to="`staffs/${value}`">{{ value }}</RouterLink>
+        </template>
+      </BaseTable>
 
-  <BasePagination
-    v-model="currentPage"
-    :total-items="staffs.length"
-    :per-page="10"
-    align="center"
-  />
+      <BasePagination
+        v-model="currentPage"
+        :total-items="staffs.length"
+        :per-page="10"
+        align="center"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
