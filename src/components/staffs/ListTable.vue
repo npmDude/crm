@@ -1,35 +1,38 @@
 <template>
-  <table class="table table-sm">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-      </tr>
-    </thead>
+  <BaseTable
+    :fields="fields"
+    :items="staffs"
+    :busy="getListLoading"
+    small
+    striped
+    :per-page="10"
+    :current-page="currentPage"
+  >
+    <template #cell(id)="{ value }">
+      <RouterLink :to="`staffs/${value}`">{{ value }}</RouterLink>
+    </template>
+  </BaseTable>
 
-    <tbody>
-      <TableLoadingRow v-if="getListLoading" :colspan="2" />
-
-      <TableNoDataRow v-else-if="staffs.length === 0" :colspan="2" />
-
-      <template v-else>
-        <tr v-for="staff in staffs" :key="staff.id">
-          <td>
-            <RouterLink :to="`staffs/${staff.id}`">{{ staff.id }}</RouterLink>
-          </td>
-          <td>{{ staff.name }}</td>
-        </tr>
-      </template>
-    </tbody>
-  </table>
+  <BasePagination
+    v-model="currentPage"
+    :total-items="staffs.length"
+    :per-page="10"
+    align="center"
+  />
 </template>
 
 <script setup lang="ts">
 import { useStaffStore } from '@/stores/staffs';
 import { storeToRefs } from 'pinia';
-import TableLoadingRow from '../TableLoadingRow.vue';
-import TableNoDataRow from '../TableNoDataRow.vue';
+import { ref } from 'vue';
+import BasePagination from '../BasePagination.vue';
+import BaseTable from '../BaseTable.vue';
 
 const staffStore = useStaffStore();
 const { staffs, getListLoading } = storeToRefs(staffStore);
+const fields = [
+  { key: 'id', label: 'ID' },
+  { key: 'name', label: 'Name' }
+];
+const currentPage = ref(1);
 </script>
